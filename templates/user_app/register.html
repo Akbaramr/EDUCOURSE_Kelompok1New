@@ -1,0 +1,40 @@
+{% extends 'user_app/base.html' %}
+{% load static %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+<script defer src="{% static 'js/signup.js'%}"></script>
+{% endblock %}
+
+
+{% block body_block %}
+<!-- <div class="jumbotron">
+    {% if registered%}
+        <h1>Thank You for registering</h1>
+    {% else %}
+        <h1>Register Here</h1>
+        <h1>Fill out this form</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" value="register">
+        </form>
+    {% endif %}
+</div> -->
+<div class="row">
+    {% if registered%}
+        <h1>Thank You for registering</h1>
+    {% else %}    
+        <div class="signup-form-container">
+        <h2 id="heading">Create Your Account!</h2>
+        <form method="POST" id="signup-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" value="register">
+            <p>Already have an account? <a href="{% url 'user_app:user_login'%}">Login here</a></p>
+        </form>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
