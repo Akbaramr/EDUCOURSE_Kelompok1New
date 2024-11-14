@@ -86,3 +86,5 @@ def teacher(request):
     return render(request,'user_app/teacher.html')
 def faq(request):
     return render(request,'user_app/faq.html')
+def my_course(request):
+    return render(request,'user_app/my_course.html')
