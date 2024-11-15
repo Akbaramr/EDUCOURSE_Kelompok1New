@@ -66,7 +66,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request , user)
-                return HttpResponseRedirect(reverse("index"))
+                return render(request,'dashboard_app/student_dashboard.html')
             else:
                 return HttpResponse("Account not active")
         else:
@@ -86,3 +86,11 @@ def teacher(request):
     return render(request,'user_app/teacher.html')
 def faq(request):
     return render(request,'user_app/faq.html')
+    
+@login_required
+def studentdashboard(request):
+    username = request.user.username  # Ambil nama pengguna yang sedang login
+    user_name = {
+        'username': username,
+    }
+    return render(request, 'dashboard_app/student_dashboard.html', context = user_name)
