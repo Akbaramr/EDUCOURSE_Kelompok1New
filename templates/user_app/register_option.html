@@ -1,0 +1,12 @@
+{% extends 'user_app/base.html' %}
+{% load static %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+<script defer src="{% static 'js/signup.js'%}"></script>
+{% endblock %}
+{% block body_block %}
+<div class="component">
+    <a href="{% url 'user_app:register'%}"> Signup as Student</a>
+    <a href="{% url 'user_app:register_teacher'%}"> Signup as Teachers</a>
+</div>
+{% endblock %}

@@ -15,5 +15,12 @@ class UserProfileInfo(models.Model):
     def __str__(self):
         # Built in attribute of django.contrib.auth.models.User
         return self.user.username
+    
+class Teacher(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    subject_taught = models.CharField(max_length=100)
+    experience = models.IntegerField()
 
+    def __str__(self):
+        return self.user.username
 

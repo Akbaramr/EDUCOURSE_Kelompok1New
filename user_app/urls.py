@@ -6,6 +6,8 @@ app_name = 'user_app'
 urlpatterns = [
     path('', views.index, name='index'),
     path('register/', views.register, name='register'),
+    path('register_teacher/', views.register_teacher, name='register_teacher'),
+    path('register_option/', views.register_option, name='register_option'),
     path('user_login/', views.user_login, name='user_login'),
     path('contact', views.contact, name='contact'),
     path('about', views.about, name='about'),
@@ -15,6 +17,7 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('studentdashboard', views.studentdashboard, name='studentdashboard'),
     path('studentprofile',views.studentprofile, name='studentprofile'),
+    path('teachersdashboard', views.teachersdashboard, name='teachersdashboard'),
     path('my_course', views.my_course, name='my_course'),
     
 ]

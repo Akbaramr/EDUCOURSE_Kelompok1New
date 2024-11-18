@@ -7,20 +7,25 @@
 
 {% block body_block %}
 <div class="row">
-    <div class="login-form-container">
+  <div class="login-form-container">
       <h2 id="heading">Login Your Account!</h2>
-          <form action="{% url 'user_app:user_login' %}" method="POST" id="signup-form">
-              {% csrf_token %}
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username" placeholder="Enter your username" required>
-  
-              <label for = "password">Password</label>
-              <input type="password" name="password">
-              
-        <button type="submit" class="button">Login</button>
-        <p>Don't have an account? <a href="{% url 'user_app:register'%}">Sign up here</a>.</p>
-      </form>
-    </div>
+      <form method="POST" action="{% url 'user_app:user_login' %}">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        
+        <label for="user_type">Login as:</label>
+        <select name="user_type" id="user_type" required>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+        </select>
+        
+        <button type="submit">Login</button>
+    </form>
   </div>
+</div>
 
 {% endblock %}
