@@ -14,12 +14,12 @@
 <body>
     <div class="containerr">
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
+          <li><a href="{% url 'user_app:studentdashboard' %}">Home</a></li>
           <li><a href="#">Search</a></li>
           <li><a href="#">My Course</a></li>
           <li><a href="#">Transaction</a></li>
           <li><a><i class="fas fa-bell"></i></a></li>
-          <li><a><i class="fas fa-cart-arrow-down"></i></a></li>
+          <li><a href="{% url 'user_app:studentprofile' %}"><i class="fas fa-cart-arrow-down"></i></a></li>
           <button class="button"><i class="fas fa-user"></i> Student</button>
         </ul>
     </div>
@@ -39,8 +39,7 @@
             <li><a href="#"><i class="fas fa-book"></i>My Learning</a></li>
             <li><br></li>
             <li><br></li>
-            {% block sidebar_block %}
-            {% endblock %}
+            <li><a href="{% url 'user_app:studentprofile' %}"><i class="fas fa-user"></i>Student</a></li>
             <li><a href="{% url 'logout' %}" ><i class="fas fa-door-open"></i>Logout</a></li>
         </ul>
     </div>

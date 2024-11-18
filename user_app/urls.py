@@ -13,9 +13,8 @@ urlpatterns = [
     path('teacher', views.teacher, name='teacher'),
     path('faq', views.faq, name='faq'),
     path('contact', views.contact, name='contact'),
-<<<<<<< HEAD
     path('studentdashboard', views.studentdashboard, name='studentdashboard'),
-=======
+    path('studentprofile',views.studentprofile, name='studentprofile'),
     path('my_course', views.my_course, name='my_course'),
->>>>>>> 33f4fb80b7df20553d2a6321d5558fccaa521a8d
+    
 ]

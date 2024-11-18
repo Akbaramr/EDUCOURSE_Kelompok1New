@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from user_app.forms import UserForm, UserProfileInfoForm
-
+from user_app.models import UserProfileInfo
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -86,16 +86,31 @@ def teacher(request):
     return render(request,'user_app/teacher.html')
 def faq(request):
     return render(request,'user_app/faq.html')
-<<<<<<< HEAD
     
 @login_required
 def studentdashboard(request):
-    username = request.user.username  # Ambil nama pengguna yang sedang login
-    user_name = {
-        'username': username,
-    }
-    return render(request, 'dashboard_app/student_dashboard.html', context = user_name)
-=======
+    user_profile = UserProfileInfo.objects.get(user=request.user) # Ambil nama pengguna yang sedang login
+
+    return render(
+        request,
+        'dashboard_app/student_dashboard.html',
+        {
+            'user_profile': user_profile,
+        }
+    )
+@login_required
+def studentprofile(request):
+    user_profile = UserProfileInfo.objects.get(user=request.user)
+    
+    # Kirim profil pengguna ke template
+    return render(
+        request,
+        'dashboard_app/student_profile.html',
+        {
+            'user_profile': user_profile,
+        }
+    )
+
 def my_course(request):
     return render(request,'user_app/my_course.html')
->>>>>>> 33f4fb80b7df20553d2a6321d5558fccaa521a8d
+
