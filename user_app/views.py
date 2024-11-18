@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from user_app.forms import UserForm, UserProfileInfoForm ,TeacherForm
-from user_app.models import UserProfileInfo, Teacher
+from user_app.models import UserProfileInfo, Teacher, Category, Product
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse , HttpResponseForbidden
 from django.urls import reverse
@@ -180,6 +180,23 @@ def teachersdashboard(request):
     )
 @login_required
 @user_is_teacher
-def my_course(request):
-    return render(request,'user_app/my_course.html')
-
+def teacherprofile(request):
+    user_profile = UserProfileInfo.objects.get(user=request.user)
+    
+    # Kirim profil pengguna ke template
+    return render(
+        request,
+        'dashboard_app/teacher_profile.html',
+        {
+            'user_profile': user_profile,
+        }
+    )
+@login_required
+@user_is_teacher
+def teacherscourses(request):
+    category = Category.objects.filter(status=0)
+    context = {'category':category}
+    return render(
+        request,
+        'dashboard_app/teacherscourses.html', context
+    )

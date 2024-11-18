@@ -1,0 +1,32 @@
+  {% extends 'dashboard_app/base_dashboard_teacher.html' %}
+  {% load static %}
+  {% block head_block %}
+  {% comment %} <link rel="stylesheet" href="{% static 'css/teachers_dashboard.css' %}"> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/my_course.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  {% endblock %}
+  {% block body_block %}
+  <section>
+    <h2 class-"moto">Tingkatkan Ketrampilan Mengajarmu!</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>List Ketersedian Courses</h1>
+          <div class="row">
+            {% for item in category %}
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="category-image">
+                    <img src="{{ item.image.url }}" alt="Category Image">
+                  </div><br>
+                  <h4 class="text-center"> {{ item.name }}</h4>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -14,10 +14,10 @@ urlpatterns = [
     path('student', views.student, name='student'),
     path('teacher', views.teacher, name='teacher'),
     path('faq', views.faq, name='faq'),
-    path('contact', views.contact, name='contact'),
+    path('contact', views.contact, name='contact'),    
     path('studentdashboard', views.studentdashboard, name='studentdashboard'),
     path('studentprofile',views.studentprofile, name='studentprofile'),
     path('teachersdashboard', views.teachersdashboard, name='teachersdashboard'),
-    path('my_course', views.my_course, name='my_course'),
-    
+    path('teacherprofile',views.teacherprofile, name='teacherprofile'),
+    path('teacherscourses', views.teacherscourses, name='teacherscourses'),
 ]
