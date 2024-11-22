@@ -2,7 +2,9 @@
 {% load static %}
 {% block head_block%}
 <link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}">
-<script defer src="{% static 'js/student.js'%}"></script>
+<script>
+  const staticUrl = "{% static '' %}";
+</script>
 {% endblock %}
 {% block body_block%}
 <h1 class="poppins-langganan" style="text-align: center;">Berlangganan <span style="color: #F48C06;">Produk</span> <br>EduTeach</h1>
@@ -154,3 +156,6 @@
   </div>
 </div>
 {% endblock%}
+{% block jsblock%}
+<script src="{% static 'js/student.js' %}"></script>
+{% endblock %}

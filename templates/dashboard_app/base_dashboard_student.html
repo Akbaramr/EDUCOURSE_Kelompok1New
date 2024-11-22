@@ -15,7 +15,7 @@
     <div class="containerr">
         <ul class="nav-links">
           <li><a href="{% url 'user_app:studentdashboard' %}">Home</a></li>
-          <li><a href="#">Search</a></li>
+          <li><a href="{% url 'courses_app:search' %}">Search</a></li>
           <li><a href="#">My Learning</a></li>
           <li><a href="#">Transaction</a></li>
           <li><a><i class="fas fa-bell"></i></a></li>
@@ -70,5 +70,7 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {% block jsblock%}
+    {% endblock %}
 </body>
 </html>

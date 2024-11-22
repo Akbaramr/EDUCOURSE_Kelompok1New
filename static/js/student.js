@@ -111,7 +111,7 @@ teachers.forEach(teacher => {
       <div class="card mb-3" style="max-width: 1080px;" data-category="${teacher.subject}">
           <div class="row g-0">
               <div class="col-md-4">
-                  <img src="{% static '${teacher.img}'%}" class="img-fluid rounded" alt="${teacher.name}">
+                  <img src="${staticUrl}${teacher.img}" class="img-fluid rounded" alt="${teacher.name}">
               </div>
               <div class="col-md-8">
                   <div class="card-body">
