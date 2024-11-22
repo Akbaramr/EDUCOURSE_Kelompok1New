@@ -20,4 +20,5 @@ urlpatterns = [
     path('teachersdashboard', views.teachersdashboard, name='teachersdashboard'),
     path('teacherprofile',views.teacherprofile, name='teacherprofile'),
     path('teacherscourses', views.teacherscourses, name='teacherscourses'),
+    path('student/profile/update/', views.update_student_profile, name='update_student_profile'),
 ]

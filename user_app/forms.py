@@ -18,3 +18,13 @@ class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
         fields = ('subject_taught', 'experience')
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+class UpdateUserProfileInfoForm(forms.ModelForm):
+    class Meta:
+        model = UserProfileInfo
+        fields = ('portofolio_site', 'profile_pic')

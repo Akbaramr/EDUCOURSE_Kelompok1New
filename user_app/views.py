@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from user_app.forms import UserForm, UserProfileInfoForm ,TeacherForm
+from user_app.forms import UserForm, UserProfileInfoForm ,TeacherForm ,UpdateUserForm , UpdateUserProfileInfoForm
 from user_app.models import UserProfileInfo, Teacher, Category, Product
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse , HttpResponseForbidden
@@ -199,4 +199,30 @@ def teacherscourses(request):
     return render(
         request,
         'dashboard_app/teacherscourses.html', context
+    )
+@login_required
+@user_is_student
+def update_student_profile(request):
+    user_profile = UserProfileInfo.objects.get(user=request.user)
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateUserProfileInfoForm(request.POST, request.FILES, instance=user_profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return HttpResponseRedirect(reverse('user_app:studentdashboard'))  # Redirect ke halaman profil
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateUserProfileInfoForm(instance=user_profile)
+
+    return render(
+        request,
+        'dashboard_app/update_student_profile.html',
+        {
+            'user_form': user_form,
+            'profile_form': profile_form,
+        }
     )
