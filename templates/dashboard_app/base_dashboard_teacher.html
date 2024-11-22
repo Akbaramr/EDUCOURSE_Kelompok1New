@@ -15,8 +15,8 @@
     <div class="containerr">
         <ul class="nav-links">
           <li><a href="{% url 'user_app:teachersdashboard' %}">Home</a></li>
-          <li><a href="#">Search</a></li>
-          <li><a href="{% url 'user_app:teacherscourses' %}">My Course</a></li>
+          <li><a href="{% url 'user_app:teacherscourses' %}">Search</a></li>
+          <li><a href="#">My Course</a></li>
           <li><a href="#">Transaction</a></li>
           <li><a><i class="fas fa-bell"></i></a></li>
           <li><a href="{% url 'user_app:teacherprofile' %}"><i class="fas fa-cart-arrow-down"></i></a></li>
@@ -29,13 +29,13 @@
         <i class="fas fa-times" id="cancel"></i>
     </label>
     <div class="sidebar">
-    <header><img src="img/Desain tanpa judul.png" alt=""></header>
+    <header><img src="{% static 'img/Desain tanpa judul.png' %}" alt=""></header>
         <ul>
             <li><a href="{% url 'user_app:teachersdashboard' %}"><i class="fas fa-qrcode"></i>Dashboard</a></li>
             <li><a href="#"><i class="fas fa-bell"></i>Notification</a></li>
             <li><a href="#"><i class="fas fa-comment"></i>Chat</a></li>
             <li><a href="#"><i class="fas fa-cart-arrow-down"></i>Cart</a></li>
-            <li><a href="{% url 'user_app:teacherscourses' %}"><i class="fas fa-chalkboard"></i></i>My Course</a></li>
+            <li><a href="#"><i class="fas fa-chalkboard"></i></i>My Course</a></li>
             <li><a href="#"><i class="fas fa-book"></i>My Learning</a></li>
             <li><br></li>
             <li><br></li>
