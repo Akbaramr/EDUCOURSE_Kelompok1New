@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse , HttpResponseForbidd
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .decorators import user_is_student, user_is_teacher
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -200,6 +201,18 @@ def teacherscourses(request):
         request,
         'dashboard_app/teacherscourses.html', context
     )
+@login_required
+@user_is_teacher
+def productcourses(request, slug):
+    if(Category.objects.filter(slug=slug, status=0)):
+        product = Product.objects.filter(category__slug=slug)
+        category = Category.objects.filter(slug=slug).first()
+        context = {'product' : product, 'category' : category}
+        return render(request, "dashboard_app/productcourses.html", context)
+    else:
+        messages.warning(request, "No such category found")
+        return redirect('teacherscourses')
+    
 @login_required
 @user_is_student
 def update_student_profile(request):
