@@ -239,3 +239,18 @@ def update_student_profile(request):
             'profile_form': profile_form,
         }
     )
+    
+@login_required
+@user_is_teacher
+def productdetails(request, cate_slug, prod_slug):
+    if(Category.objects.filter(slug=cate_slug, status=0)):
+        if(Product.objects.filter(slug=prod_slug, status=0)):
+            products = Product.objects.filter(slug=prod_slug, status=0).first
+            context = {'products':products}
+        else:
+            messages.warning(request, "No such product found")
+            return redirect('productcourses')
+    else:
+        messages.warning(request, "No such category found")
+        return redirect('teacherscourses')
+    return render(request,"dashboard_app/productdetails.html", context)

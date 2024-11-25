@@ -22,4 +22,5 @@ urlpatterns = [
     path('teacherscourses', views.teacherscourses, name='teacherscourses'),
     path('teacherscourses/<str:slug>', views.productcourses, name='productcourses'),
     path('student/profile/update/', views.update_student_profile, name='update_student_profile'),
+    path('teacherscourses/<str:cate_slug>/<str:prod_slug>', views.productdetails, name='productdetails'),
 ]
