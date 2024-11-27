@@ -1,0 +1,10 @@
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('author', 'title', 'text', 'video','thumbnail' )
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'textinputclass'}),
+        }

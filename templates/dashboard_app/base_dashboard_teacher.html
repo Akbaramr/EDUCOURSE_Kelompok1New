@@ -16,7 +16,8 @@
         <ul class="nav-links">
           <li><a href="{% url 'user_app:teachersdashboard' %}">Home</a></li>
           <li><a href="{% url 'user_app:teacherscourses' %}">Search</a></li>
-          <li><a href="#">My Course</a></li>
+          <li><a href="{% url 'post_new' %}">My Course</a></li>
+          <li><a href="{% url 'post_draft_list' %}">Draft</a></li>
           <li><a href="#">Transaction</a></li>
           <li><a><i class="fas fa-bell"></i></a></li>
           <li><a href="{% url 'user_app:teacherprofile' %}"><i class="fas fa-cart-arrow-down"></i></a></li>
