@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from courses_app.models import Post
 from courses_app.forms import PostForm
-
+from user_app.models import Teacher
 # Create your views here.
 
 class PostListView(ListView):
@@ -26,13 +26,23 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
     form_class = PostForm
     model = Post
+    template_name = 'courses_app/post_form.html'  # Pastikan Anda menentukan template yang tepat
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Ambil instance Teacher untuk pengguna yang sedang login
+        teacher = Teacher.objects.get(user=self.request.user)
+        
+        # Ambil semua post yang ditulis oleh guru ini
+        context['posts'] = Post.objects.filter(author=teacher).order_by('-created_date')  # Mengurutkan berdasarkan tanggal pembuatan terbaru
+        return context
 
     def form_valid(self, form):
-        # Simpan post terlebih dahulu
         post = form.save(commit=False)
-        post.save()  # Save post ke database
-        # Redirect ke halaman draft list
-        return redirect('post_draft_list')
+        # Mengaitkan post dengan guru yang sedang login
+        post.author = Teacher.objects.get(user=self.request.user)
+        post.save()  # Simpan post ke database
+        return redirect('post_draft_list')  # Ganti dengan nama URL yang sesuai
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
@@ -50,10 +60,12 @@ class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Post
     template_name = 'courses_app/post_draft_list.html'
-    context_object_name = 'posts'  # Ubah nama default 'object_list' menjadi 'posts'
+    context_object_name = 'posts'  # Change default 'object_list' to 'posts'
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__isnull=True).order_by('created_date')
+        # Get the Teacher instance related to the logged-in User
+        teacher = Teacher.objects.get(user=self.request.user)
+        return Post.objects.filter(author=teacher, published_date__isnull=True).order_by('created_date')
     
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post

@@ -1,9 +1,23 @@
 {% extends 'dashboard_app/base_dashboard_teacher.html' %}
 {% block body_block %}
-    <h1>New post: </h1>
-    <form method="POST" class="post-form">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button class="btn btn-primary save" type="submit">Save</button>
-    </form>
+<h2>Your Posts:</h2>
+<ul>
+    {% for post in posts %}
+        <li>
+            <strong>{{ post.title }}</strong><br>
+            {{ post.text|truncatewords:20 }}
+            <br>
+            <em>Created on: {{ post.created_date }}</em>
+        </li>
+    {% empty %}
+        <li>No posts available.</li>
+    {% endfor %}
+</ul>
+
+<h1>New post: </h1>
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary save" type="submit">Save</button>
+</form>
 {% endblock %}
