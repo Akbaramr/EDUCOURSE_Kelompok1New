@@ -21,42 +21,42 @@ const teachers = [
   {
       name: "Sarifudin",
       subject: "Kimia",
-      img: "{% static '/img/teacher1.jpg' %}",
+      img: "img/teacher1.jpg",
       schedule: "Senin - Jumat, 09:00 - 16:00",
       lastUpdated: "3 mins ago"
   },
   {
       name: "Sarah",
       subject: "Biologi",
-      img: "{% static '/img/teacher2.jpeg'%}",
+      img: "img/teacher2.jpeg",
       schedule: "Senin - Jumat, 10:00 - 17:00",
       lastUpdated: "4 mins ago"
   },
   {
       name: "Bunga",
       subject: "Fisika",
-      img: "{% static '/img/teacher3.jpg'%}",
+      img: "img/teacher3.jpg",
       schedule: "Senin - Jumat, 08:00 - 18:00",
       lastUpdated: "3 mins ago"
   },
   {
       name: "Bella",
       subject: "Matematika",
-      img: "{% static '/img/teacher4.jpg'%}",
+      img: "img/teacher4.jpg",
       schedule: "Senin - Jumat, 09:00 - 18:00",
       lastUpdated: "3 mins ago"
   },
   {
       name: "Andi",
       subject: "Matematika",
-      img: "{% static '/img/teacher5.jpg'%}",
+      img: "img/teacher5.jpg",
       schedule: "Senin - Jumat, 15:00 - 21:00",
       lastUpdated: "20 mins ago"
   },
   {
       name: "Florensia",
       subject: "Kimia",
-      img: "{% static '/img/teacher6.jpg'%}",
+      img: "img/teacher6.jpg",
       schedule: "Senin - Jumat, 16:00 - 21:00",
       lastUpdated: "8 mins ago"
   },

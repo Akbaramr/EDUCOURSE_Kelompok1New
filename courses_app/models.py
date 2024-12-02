@@ -9,6 +9,7 @@ class Post(models.Model):
     author = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     created_date = models.DateTimeField(default=timezone.now)
     thumbnail = models.ImageField(upload_to='thumbnail',blank=True)
     video = EmbedVideoField(blank=True, null=True)  # Tambahkan field untuk video

@@ -1,67 +1,50 @@
 {% extends 'dashboard_app/base_dashboard_student.html' %}
+{% load static %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+{% endblock %}
 {% load embed_video_tags %}
 {% block body_block %}
 <!-- Post title -->
-
-<div class="py-3" style="background:#FFBD73">
-    <div class="container" >
-      <a class="text-black" href="{% url 'user_app:teachersdashboard' %}" style="font-size: 25px; text-decoration: none !important;"> Dashboard /</a>
-      <a class="text-black" href="{% url 'post_new' %}" style="font-size: 25px; text-decoration: none !important;"> My Courses /</a>
-      <a class="text-black" href="#" style="font-size: 25px; text-decoration: none !important;"> Publish </a>
+<div class="py-3" style="background:#FFBD73;position: relative;">
+    <div class="container">
+        <a class="text-black" href="{% url 'user_app:studentdashboard' %}" style="font-size: 25px; text-decoration: none !important;"> Dashboard /</a>
+        <a class="text-black" href="{% url 'post_new' %}" style="font-size: 25px; text-decoration: none !important;"> My Courses /</a>
+        <a class="text-black" href="#" style="font-size: 25px; text-decoration: none !important;"> Publish </a>
+        <h1 class="post-title" >{{ post.title }}</h1>
+        <p class="post-content" style="font-size: 24px !important; ">
+        {{ post.text | safe | linebreaksbr }}
+        </p>
+    <!-- Post published date or publish button -->
+        {% if post.published_date %}
+        <div class="date post-date" style="font-size: 22px !important; margin-left: 5px !important;">{{ post.published_date }}</div>
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        {% endif %}
     </div>
+    <div class="block">
+        <!-- Thumbnail Image -->
+       {% if post.thumbnail %}
+        <img src="{{ post.thumbnail.url }}" alt="Thumbnail" style="width: 100%; height: auto;">
+       {% else %}
+        <p>No image available</p>
+       {% endif %}
+       <div class="post-price" style="font-size: 24px !important; margin-top: 20px; font-weight: bold;">
+        Price: Rp.{{ post.price }}
+       </div>
+       <button type="button" data-testid="add-to-cart-button" class="ud-btn ud-btn-large ud-btn-brand ud-heading-md add-to-cart" fdprocessedid="s2t4t5" style="width: 80%;">Tambahkan ke keranjang</button>
+   </div>
 </div>
 <br>
-<div class="container" >
-    <div class="row" >
-      <div class="col-md-12">
-        <div class="cardd shadow" style="background-color:#ffff !important;">
-          <div class="card-body">
-            <br>
-                <h1 class="post-title" style="text-transform: uppercase !important; text-align: center !important;font-size:50px !important;">{{ post.title }}</h1>
-                <br>
-                <!-- Video -->
-                {% if post.video %}
-                    <p>Video URL: {{ post.video }}</p>
-                    <!-- Menampilkan video -->
-                    {% video post.video 'huge'%}
-                    
-                {% else %}
-                    <p>No video found for this post.</p>
-                {% endif %}
-
-                <!-- Post published date or publish button -->
-                {% if post.published_date %}
-                    <div class="date post-date" style="font-size: 22px !important; margin-left: 5px !important;">{{ post.published_date }}</div>
-                {% else %}
-                    <a class="btn btn-primary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
-                {% endif %}
-
-                <!-- Post content -->
-                
-                <p class="post-content" style="font-size: 24px !important;border-top: 2px solid gray !important; margin-left: 5px !important;">{{post.text | safe | linebreaksbr }}</p>
-
-                <!-- Post edit and remove buttons -->
-                {% if user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}" style="float: right !important; margin: 15px !important;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                        </svg>
-                    </a>
-                    <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}" style="float: right !important; margin: 15px !important;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                        </svg>
-                    </a>
-                    <a class="btn btn-primary" href="#" style="float: right !important; margin: 15px !important;">
-                        <p style="font-size:20px !important; align-items: center !important; margin: 0 !important"> Kerjakan Soal Latihan Disini </p>
-                    </a>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="item">
+    <!-- Video -->
+    {% if post.video %}
+    <!-- Menampilkan video -->
+    {% video post.video 'medium'%}
+    {% else %}
+    <p>No video found for this post.</p>
+    {% endif %}   
+    <p class="deskripsi">Contoh video pembelajaran</p>                 
 </div>
-{% endif %}
 <br>
 {% endblock %}
